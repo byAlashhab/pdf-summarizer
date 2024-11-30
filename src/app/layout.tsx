@@ -5,16 +5,9 @@ import Google from "../../public/google.png";
 import Sleeping from "../../public/sleeping.png";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import {
-  BookAIcon,
-  BookDashedIcon,
-  LogOutIcon,
-  PencilIcon,
-  PenIcon,
-} from "lucide-react";
+import { BookDashedIcon, LogOutIcon } from "lucide-react";
 import FormButton from "@/components/FormButton";
-import { Actor } from "next/font/google";
-import { twMerge } from "tailwind-merge";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -32,6 +25,7 @@ export default async function RootLayout({
     "use server";
     await signOut();
   }
+
 
   return (
     <html lang="en">
@@ -78,6 +72,7 @@ export default async function RootLayout({
             <p className="font-mono text-base">Sign in to continue 🤸‍♂️</p>
           </div>
         )}
+        <Toaster />
       </body>
     </html>
   );
