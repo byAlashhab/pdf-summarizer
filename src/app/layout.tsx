@@ -29,7 +29,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className="w-screen min-h-screen">
+      <body className="w-screen min-h-screen bg-slate-50">
         <nav className="py-8 px-20 flex justify-between items-center">
           <h1 className="flex items-center gap-1">
             <span className="font-semibold text-roody">PDF </span>
@@ -39,10 +39,12 @@ export default async function RootLayout({
           {session?.user ? (
             <div className="flex items-center">
               <FormButton action={logout} element={<LogOutIcon />} />
-              <img
+              <Image
                 src={session.user.image ?? ""}
                 className="w-10 h-10 rounded-full"
                 alt=""
+                width={40}
+                height={40}
               />
             </div>
           ) : (
