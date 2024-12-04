@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 //@ts-ignore
 import pdf from "pdf-parse/lib/pdf-parse";
+import { auth } from "@/config/auth";
 
-export async function POST(req: NextRequest) {
+export const POST = auth(async function (req) {
+  if (!req.auth) {
+    return NextResponse.json({ message: "Not authenticated" }, { status: 401 });
+  }
+  
   const { file } = await req.json();
 
   if (!file) {
@@ -18,4 +23,4 @@ export async function POST(req: NextRequest) {
     console.log(error);
     return new NextResponse("Error", { status: 500 });
   }
-}
+});

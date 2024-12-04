@@ -14,18 +14,21 @@ const font = ABeeZee({ weight: "400", subsets: ["latin"] });
 export default function Home() {
   const inputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
+  const [fileObject, setFileObject] = useState<string | null>(null);
   const [fileString, setFileString] = useState<string | null>(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  
   if (error) return <ErrorComp />;
 
   return (
     <>
-      {fileString && !loading && <Chat file={fileString} />}
+      {fileObject && fileString && !loading && (
+        <Chat file={fileObject} fileString={fileString} />
+      )}
 
       <AnimatePresence>
-        {!fileString && (
+        {!fileObject && (
           <motion.div
             className="absolute inset-0 m-auto w-fit h-fit flex flex-col items-center"
             whileHover={{ scale: 1.03 }}
@@ -88,12 +91,13 @@ export default function Home() {
                       });
 
                       const data = await response.json();
+                      setFileString(data.text);
                     } catch (err) {
                       console.log(err);
                       setError(true);
                     } finally {
                       setLoading(false);
-                      setFileString(URL.createObjectURL(file));
+                      setFileObject(URL.createObjectURL(file));
                     }
                   };
 
