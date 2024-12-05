@@ -1,3 +1,4 @@
+"use client";
 import { AnimatePresence, motion } from "motion/react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -7,6 +8,7 @@ import { twMerge } from "tailwind-merge";
 import { Skeleton } from "./ui/skeleton";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { useToast } from "@/hooks/use-toast";
 
 type message = {
   role: "user" | "assistant";
@@ -18,6 +20,7 @@ function Chat({ file, fileString }: { file: string; fileString: string }) {
   const [error, setError] = useState(false);
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState<message[]>([]);
+  const { toast } = useToast();
 
   async function send(e: FormEvent) {
     e.preventDefault();
@@ -35,10 +38,19 @@ function Chat({ file, fileString }: { file: string; fileString: string }) {
       credentials: "include",
     });
 
-    if (!res.ok) {
-      console.log("server error");
-    }
     const resDa = await res.json();
+
+    if (!res.ok) {
+      
+      toast({
+        title: "Error",
+        description: resDa.message,
+      });
+
+      setMessage("");
+      setLoading(false);
+      return;
+    }
 
     setChatMessages((prev) => [...prev, resDa]);
     setMessage("");

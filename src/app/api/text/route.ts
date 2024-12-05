@@ -7,20 +7,21 @@ export const POST = auth(async function (req) {
   if (!req.auth) {
     return NextResponse.json({ message: "Not authenticated" }, { status: 401 });
   }
-  
-  const { file } = await req.json();
-
-  if (!file) {
-    return new NextResponse("Error", { status: 400 });
-  }
 
   try {
+
+    const { file } = await req.json();
+
+    if (!file) {
+      return new NextResponse("missing data", { status: 400 });
+    }
+
     const buffer = Buffer.from(file, "base64");
     const { text } = await pdf(buffer);
 
     return NextResponse.json({ text });
-  } catch (error) {
-    console.log(error);
-    return new NextResponse("Error", { status: 500 });
+  } catch (err) {
+    console.log(err);
+    return new NextResponse("server error", { status: 500 });
   }
 });
