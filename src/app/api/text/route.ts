@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 //@ts-ignore
 import pdf from "pdf-parse/lib/pdf-parse";
 import { auth } from "@/config/auth";

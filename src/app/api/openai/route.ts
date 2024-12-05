@@ -45,7 +45,7 @@ export const POST = auth(async function (req) {
     const { pdfText, message } = await req.json();
 
     if (!pdfText || !message) {
-      return new NextResponse("missing data", { status: 400 });
+      return NextResponse.json({ message: "missing data" }, { status: 400 });
     }
 
     const completion = await openai.chat.completions.create({
