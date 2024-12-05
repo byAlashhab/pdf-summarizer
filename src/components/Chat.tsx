@@ -2,7 +2,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { Loader, SendIcon } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 import { Skeleton } from "./ui/skeleton";
@@ -21,6 +21,12 @@ function Chat({ file, fileString }: { file: string; fileString: string }) {
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState<message[]>([]);
   const { toast } = useToast();
+
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatMessages]);
 
   async function send(e: FormEvent) {
     e.preventDefault();
@@ -41,7 +47,7 @@ function Chat({ file, fileString }: { file: string; fileString: string }) {
     const resDa = await res.json();
 
     if (!res.ok) {
-      
+
       toast({
         title: "Error",
         description: resDa.message,
@@ -127,6 +133,7 @@ function Chat({ file, fileString }: { file: string; fileString: string }) {
             </motion.div>
           ))}
           {loading && <Skeleton className="w-[60%] h-[30px] rounded-lg" />}
+          <div ref={messagesEndRef} />
         </div>
         <form className="flex gap-2 mt-2" onSubmit={send}>
           <Input
