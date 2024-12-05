@@ -44,6 +44,10 @@ export const POST = auth(async function (req) {
 
     const { pdfText, message } = await req.json();
 
+    if (!pdfText || !message) {
+      return new NextResponse("missing data", { status: 400 });
+    }
+
     const completion = await openai.chat.completions.create({
       model: "mistralai/mixtral-8x7b-instruct-v0.1",
       messages: [
