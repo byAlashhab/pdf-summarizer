@@ -8,8 +8,6 @@ import ErrorComp from "@/components/Error";
 import Chat from "@/components/Chat";
 import { AnimatePresence, motion } from "motion/react";
 
-
-
 export default function Home() {
   const inputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();

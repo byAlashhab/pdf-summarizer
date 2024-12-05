@@ -9,14 +9,14 @@ import { Skeleton } from "./ui/skeleton";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useToast } from "@/hooks/use-toast";
-import { ABeeZee } from "next/font/google";
+
 
 type message = {
   role: "user" | "assistant";
   content: string;
 };
 
-const font = ABeeZee({ weight: "400", subsets: ["latin"] });
+
 
 function Chat({ file, fileString }: { file: string; fileString: string }) {
   const [loading, setLoading] = useState(false);
@@ -68,10 +68,7 @@ function Chat({ file, fileString }: { file: string; fileString: string }) {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { duration: 0.5, delay: 0.5 } }}
-      className={twMerge(
-        font.className,
-        "translate-y-6 lg:translate-y-0 absolute inset-0 m-auto w-4/5 lg:w-[900px] h-[500px] rounded-lg flex p-2 shadow-lg bg-white"
-      )}
+      className="translate-y-6 lg:translate-y-0 absolute inset-0 m-auto w-4/5 lg:w-[900px] h-[500px] rounded-lg flex p-2 shadow-lg bg-white"
     >
       <div className="w-1/2 bg-white rounded-lg p-2 hidden lg:block">
         <iframe
