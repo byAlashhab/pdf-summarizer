@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { auth, signIn, signOut } from "@/config/auth";
-import Google from "../../public/google.png";
-import Sleeping from "../../public/sleeping.png";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { BookDashedIcon, LogOutIcon } from "lucide-react";
@@ -65,7 +63,7 @@ export default async function RootLayout({
                 className="flex items-center font-semibold gap-0 h-[40px] p-0 pl-3"
               >
                 SignIn
-                <Image src={Google} alt="google icon" width={40} height={40} />
+                <Image src={"/google.png"} alt="google icon" width={40} height={40} />
               </Button>
             </form>
           )}
@@ -75,7 +73,7 @@ export default async function RootLayout({
           children
         ) : (
           <div className="absolute inset-0 m-auto w-fit h-fit flex flex-col items-center gap-3">
-            <Image src={Sleeping} alt="" width={100} height={100} />
+            <Image src={"/sleeping.png"} alt="" width={100} height={100} />
             <p className="text-base">Sign in to continue 🤸‍♂️</p>
           </div>
         )}
