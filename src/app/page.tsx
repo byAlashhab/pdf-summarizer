@@ -3,13 +3,12 @@
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Loader } from "lucide-react";
-import { ABeeZee } from "next/font/google";
 import { useRef, useState } from "react";
 import ErrorComp from "@/components/Error";
 import Chat from "@/components/Chat";
 import { AnimatePresence, motion } from "motion/react";
 
-const font = ABeeZee({ weight: "400", subsets: ["latin"] });
+
 
 export default function Home() {
   const inputRef = useRef<HTMLInputElement>(null);
