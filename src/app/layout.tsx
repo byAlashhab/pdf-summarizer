@@ -8,6 +8,7 @@ import FormButton from "@/components/FormButton";
 import { Toaster } from "@/components/ui/toaster";
 import { ABeeZee } from "next/font/google";
 import { twMerge } from "tailwind-merge";
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: "Pdf Summarizer",
@@ -77,6 +78,7 @@ export default async function RootLayout({
           </div>
         )}
         <Toaster />
+        <Analytics />
       </body>
     </html>
   );
